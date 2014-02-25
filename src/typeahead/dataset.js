@@ -26,6 +26,7 @@ var Dataset = (function() {
     this.query = null;
 
     this.highlight = !!o.highlight;
+    this.minLength = o.minLength;
     this.name = o.name || _.getUniqueId();
 
     this.source = o.source;
@@ -144,7 +145,9 @@ var Dataset = (function() {
       this.source(query, renderIfQueryIsSame);
 
       function renderIfQueryIsSame(suggestions) {
-        query === that.query && that._render(query, suggestions);
+        if (query === that.query || (that.minLength === 0 && query === '')) {
+          that._render(query, suggestions);
+        }
       }
     },
 
