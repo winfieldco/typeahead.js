@@ -87,7 +87,6 @@ var Dropdown = (function() {
       // XXXCMA Add a transition
       this.$menu.css('display', 'block');
       this.$menu.hide();
-      alert(this.dropdownAnimationDuration);
       this.$menu.stop(true).slideDown(this.dropdownAnimationDuration);
       
       //this.$menu.css('display', 'block');

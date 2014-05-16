@@ -706,7 +706,6 @@
             _show: function() {
                 this.$menu.css("display", "block");
                 this.$menu.hide();
-                alert(this.dropdownAnimationDuration);
                 this.$menu.stop(true).slideDown(this.dropdownAnimationDuration);
             },
             _getSuggestions: function getSuggestions() {
