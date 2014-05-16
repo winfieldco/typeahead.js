@@ -39,7 +39,8 @@
           withHint: _.isUndefined(o.hint) ? true : !!o.hint,
           minLength: minLength,
           autoselect: o.autoselect,
-          datasets: datasets
+          datasets: datasets,
+          dropdownAnimationDuration: o.dropdownAnimationDuration
         });
 
         $input.data(typeaheadKey, typeahead);

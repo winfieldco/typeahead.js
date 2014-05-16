@@ -22,15 +22,16 @@ var Typeahead = (function() {
 
     this.autoselect = !!o.autoselect;
     this.minLength = o.minLength;
+    
     this.$node = buildDomStructure(o.input, o.withHint);
 
     $menu = this.$node.find('.tt-dropdown-menu');
     $input = this.$node.find('.tt-input');
     $hint = this.$node.find('.tt-hint');
 
-    this.eventBus = o.eventBus || new EventBus({ el: $input });
+    this.eventBus = o.eventBus || new EventBus({ el: $input });  
 
-    this.dropdown = new Dropdown({ menu: $menu, datasets: o.datasets })
+    this.dropdown = new Dropdown({ menu: $menu, datasets: o.datasets, dropdownAnimationDuration: o.dropdownAnimationDuration })
     .onSync('suggestionClicked', this._onSuggestionClicked, this)
     .onSync('cursorMoved', this._onCursorMoved, this)
     .onSync('cursorRemoved', this._onCursorRemoved, this)

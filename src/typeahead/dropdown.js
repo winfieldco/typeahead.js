@@ -18,6 +18,8 @@ var Dropdown = (function() {
     if (!o.menu) {
       $.error('menu is required');
     }
+    
+    this.dropdownAnimationDuration = o.dropdownAnimationDuration;    
 
     this.isOpen = false;
     this.isEmpty = true;
@@ -71,13 +73,25 @@ var Dropdown = (function() {
     },
 
     _hide: function() {
-      this.$menu.hide();
+    
+      // XXXCMA Add a transition
+      this.$menu.stop(true).slideUp(this.dropdownAnimationDuration);
+    
+      //this.$menu.hide();
     },
 
     _show: function() {
       // can't use jQuery#show because $menu is a span element we want
       // display: block; not dislay: inline;
+      
+      // XXXCMA Add a transition
       this.$menu.css('display', 'block');
+      this.$menu.hide();
+      alert(this.dropdownAnimationDuration);
+      this.$menu.stop(true).slideDown(this.dropdownAnimationDuration);
+      
+      //this.$menu.css('display', 'block');
+      
     },
 
     _getSuggestions: function getSuggestions() {
