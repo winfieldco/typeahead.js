@@ -837,6 +837,22 @@
             $menu = this.$node.find(".tt-dropdown-menu");
             $input = this.$node.find(".tt-input");
             $hint = this.$node.find(".tt-hint");
+            $input.on("blur.tt", function($e) {
+                var active, isActive, hasActive;
+                active = document.activeElement;
+                isActive = $menu.is(active);
+                hasActive = $menu.has(active).length > 0;
+                if (_.isMsie() && (isActive || hasActive)) {
+                    $e.preventDefault();
+                    $e.stopImmediatePropagation();
+                    _.defer(function() {
+                        $input.focus();
+                    });
+                }
+            });
+            $menu.on("mousedown.tt", function($e) {
+                $e.preventDefault();
+            });
             this.eventBus = o.eventBus || new EventBus({
                 el: $input
             });
