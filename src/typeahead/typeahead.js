@@ -60,6 +60,8 @@ var Typeahead = (function() {
     .onSync('cursorRemoved', this._onCursorRemoved, this)
     .onSync('opened', this._onOpened, this)
     .onSync('closed', this._onClosed, this)
+    .onSync('dropdownShow', this._onDropdownShow, this)
+    .onSync('dropdownHide', this._onDropdownHide, this)
     .onAsync('datasetRendered', this._onDatasetRendered, this);
 
     this.input = new Input({ input: $input, hint: $hint })
@@ -121,6 +123,14 @@ var Typeahead = (function() {
     _onDatasetRendered: function onDatasetRendered() {
       this._updateHint();
     },
+
+    _onDropdownShow: function onDropdownShow() {
+      this.eventBus.trigger('dropdownShow');
+    },
+
+    _onDropdownHide: function onDropdownHide() {
+      this.eventBus.trigger('dropdownHide');
+    },    
 
     _onOpened: function onOpened() {
       // If minLength is 0, we need to update the dropdown so if it is opened

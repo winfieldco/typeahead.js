@@ -74,6 +74,8 @@ var Dropdown = (function() {
 
     _hide: function() {
     
+      this.trigger('dropdownHide');
+
       // XXXCMA Add a transition
       this.$menu.stop(true).slideUp(this.dropdownAnimationDuration);
     
@@ -83,6 +85,8 @@ var Dropdown = (function() {
     _show: function() {
       // can't use jQuery#show because $menu is a span element we want
       // display: block; not dislay: inline;
+
+      this.trigger('dropdownShow');
       
       // XXXCMA Add a transition
       this.$menu.css('display', 'block');

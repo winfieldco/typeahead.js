@@ -701,9 +701,11 @@
                 }
             },
             _hide: function() {
+                this.trigger("dropdownHide");
                 this.$menu.stop(true).slideUp(this.dropdownAnimationDuration);
             },
             _show: function() {
+                this.trigger("dropdownShow");
                 this.$menu.css("display", "block");
                 this.$menu.hide();
                 this.$menu.stop(true).slideDown(this.dropdownAnimationDuration);
@@ -860,7 +862,7 @@
                 menu: $menu,
                 datasets: o.datasets,
                 dropdownAnimationDuration: o.dropdownAnimationDuration
-            }).onSync("suggestionClicked", this._onSuggestionClicked, this).onSync("cursorMoved", this._onCursorMoved, this).onSync("cursorRemoved", this._onCursorRemoved, this).onSync("opened", this._onOpened, this).onSync("closed", this._onClosed, this).onAsync("datasetRendered", this._onDatasetRendered, this);
+            }).onSync("suggestionClicked", this._onSuggestionClicked, this).onSync("cursorMoved", this._onCursorMoved, this).onSync("cursorRemoved", this._onCursorRemoved, this).onSync("opened", this._onOpened, this).onSync("closed", this._onClosed, this).onSync("dropdownShow", this._onDropdownShow, this).onSync("dropdownHide", this._onDropdownHide, this).onAsync("datasetRendered", this._onDatasetRendered, this);
             this.input = new Input({
                 input: $input,
                 hint: $hint
@@ -894,6 +896,12 @@
             },
             _onDatasetRendered: function onDatasetRendered() {
                 this._updateHint();
+            },
+            _onDropdownShow: function onDropdownShow() {
+                this.eventBus.trigger("dropdownShow");
+            },
+            _onDropdownHide: function onDropdownHide() {
+                this.eventBus.trigger("dropdownHide");
             },
             _onOpened: function onOpened() {
                 if (this.minLength === 0) {
